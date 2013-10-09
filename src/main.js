@@ -86,16 +86,16 @@ var Todo = Backbone.Model.extend({
 
 window.todo = new Todo({ name: 'Learn models' });
 
-//
-// Listen for ALL property changes
-//
+  //
+  // Listen for ALL property changes
+  //
 todo.on('change', function(model){
   console.log("\nSomething changed in model: " + model.get('name'));
 });
 
-//
-// Listen for ONLY a property change on 'complete'
-//
+  //
+  // Listen for ONLY a property change on 'complete'
+  //
 todo.on('change:complete', function(model, newComplete){
   if (newComplete) {
     alert(model.get('name') + " is now complete!");
@@ -103,5 +103,49 @@ todo.on('change:complete', function(model, newComplete){
     alert("Oops, " + model.get('name') + " isn't done yet.");
   }
 });
+
+// 8 Exercise 
+
+var KungFuBoard = Backbone.Model.extend({
+  
+  initialize: function(attrs){
+    this.size = attrs.hp;
+    this.on('change:hp', this.break);
+  },
+  damage: function(amount){
+    var kungFuBoardHP = this.get('hp');
+    if(kungFuBoardHP - amount >= 0 ) {
+      result = kungFuBoardHP - amount;
+    } else {
+      result = 0;
+    }
+
+    this.set({hp: result});
+  },
+  break: function(){
+    var kungFuBoardHP = this.get('hp');
+    if(kungFuBoardHP === 0){
+      
+      console.log("A " + this.size + " board breaks!")
+    } else {
+      console.log("Still alive (HP: " + this.get('hp') + ")")
+    }
+  }
+
+});
+
+var smallBoard = new KungFuBoard({ hp: 5 });
+var bigBoard = new KungFuBoard({ hp: 10 });
+
+smallBoard.damage(4);
+smallBoard.damage(3);
+console.log('Small board hp should be zero:', smallBoard.get('hp'));
+
+bigBoard.damage(4);
+bigBoard.damage(4);
+bigBoard.damage(4);
+console.log('Big board hp should be zero:', bigBoard.get('hp'));
+
+
 
 
