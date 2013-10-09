@@ -1,11 +1,11 @@
 //http://learn.themakersquare.com/pages/week-5/backbone-models
 
-var Todo = Backbone.Model.extend({
+// var Todo = Backbone.Model.extend({
 
-  uncheck: function() {
-    this.set({ complete: false });
-  }
-});
+//   uncheck: function() {
+//     this.set({ complete: false });
+//   }
+// });
 
 // 4 - Partner ex #1 - Player Mario 
 var Player = Backbone.Model.extend({
@@ -73,6 +73,8 @@ console.log('Enemy should have 3 hp:', enemy.get('hp'));
 
 player.attack(enemy);
 console.log('Enemy should have 0 hp:', enemy.get('hp'));
+
+
 
 // 7 Model Events
 
